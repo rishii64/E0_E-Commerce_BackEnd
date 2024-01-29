@@ -6,6 +6,9 @@ const cors = require('cors')
 app.use(cors({
     origin:"*"
 }))
+app.get('/',(req,res)=>{
+    return res.send(store)
+})
 app.get('/products/:productData',(req,res)=>{
     let category = req.params.productData
     let data = store.filter(data=> data.category === `${category}`)
