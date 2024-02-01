@@ -1,6 +1,10 @@
 const {mongoose} = require('../Config/db')
 
 const userSchema = mongoose.Schema({
+    name:{
+        type: String,
+        required: true
+    },
     email:{
         type:String,
         required:true,
@@ -9,8 +13,7 @@ const userSchema = mongoose.Schema({
     password:{
         type:String,
         required:true
-    },
-  
+    }
 })
 
 const userCollection = mongoose.model('User',userSchema)
