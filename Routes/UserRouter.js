@@ -45,8 +45,8 @@ route.post('/login', async (req, res) => {
 //     res.send({ msg: 'Welcome to Home Page' })
 // })
 
-route.get('/addToCart', auth, (req, res) => {
-    res.send({ msg: 'Welcome to your cart' })
-})
+// route.get('/addToCart', auth, (req, res) => {
+//     res.send({ msg: 'Welcome to your cart' })
+// })
 
 module.exports = route
