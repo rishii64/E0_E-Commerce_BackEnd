@@ -3,7 +3,7 @@ const app = express()
 const store = require('./Store/Store')
 const cors = require('cors')
 const route = require('./Routes/UserRouter')
-const {connection} = require('./Config/config')
+const {connection} = require('./Config/db')
 
 require('dotenv').config()
 const port = process.env.PORT
@@ -13,7 +13,7 @@ app.use(cors({
 }))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(route)
+app.use('/user',route)
 app.get('/', (req, res) => {
     return res.send(store)
 })
@@ -30,7 +30,7 @@ app.get('/product/:category/:id', (req, res) => {
 app.listen(port, (req, res) => {
     try {
         console.log('server is running fine');
-        // connection()
+        connection()
     }
     catch (err) {
         console.error('Error:', err)

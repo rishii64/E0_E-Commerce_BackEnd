@@ -3,10 +3,11 @@ const route = express.Router()
 const bcrypt = require('bcrypt')
 const saltRound = 10
 const jwt = require('jsonwebtoken')
-const secretkey = 'sm'
 const auth = require('../Middleware/Auth')
+require('dotenv').config()
+const secretkey = process.env.secretKey
 
-const { databaseName } = require('../config/config')
+const { databaseName } = require('../Config/db')
 const userCollection = databaseName.collection('test_user')
 
 route.post('/register', async (req, res) => {
@@ -17,7 +18,6 @@ route.post('/register', async (req, res) => {
         return res.send({ msg: 'This email is already in use !!' })
     data.password = bcrypt.hashSync(data.password, saltRound)   
     console.log('Hashed Data: ', data);
-
 
     const insertData = await userCollection.insertOne(data)   
     const token = jwt.sign({ user: data.email }, secretkey)   
@@ -41,12 +41,12 @@ route.post('/login', async (req, res) => {
     }
 })
 
-route.get('/home', (req, res) => {
-    res.send({ msg: 'Welcome to Home Page' })
-})
+// route.get('/home', (req, res) => {
+//     res.send({ msg: 'Welcome to Home Page' })
+// })
 
-route.get('/dashboard', auth, (req, res) => {
-    res.send({ msg: 'Welcome to dashboard' })
+route.get('/addToCart', auth, (req, res) => {
+    res.send({ msg: 'Welcome to your cart' })
 })
 
 module.exports = route

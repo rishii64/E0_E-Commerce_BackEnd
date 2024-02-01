@@ -12,5 +12,5 @@ const connection = async() => {
         console.error('Error:', err)
     }
 }
-const databaseName = clientCloudDB.db('test')
+const databaseName = clientCloudDB.db('uShop')
 module.exports = { connection, databaseName }
