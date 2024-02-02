@@ -2,7 +2,6 @@ const route = require("express").Router()
 const bcrypt = require('bcrypt')
 const saltRound = 10
 const jwt = require('jsonwebtoken')
-const auth = require('../Middleware/Auth')
 require('dotenv').config()
 const secretkey = process.env.secretKey
 
@@ -14,7 +13,7 @@ route.post('/register', async (req, res) => {
     if (accnt)
         return res.send({ msg: 'This email is already in use !!' })
     data.password = bcrypt.hashSync(data.password, saltRound)
-    console.log('Hashed Data: ', data);
+    console.log('Hashed Data:', data);
 
     const insertData = await userCollection.create(data)
     const token = jwt.sign({ user: data.email }, secretkey)
@@ -38,7 +37,7 @@ route.post('/login', async (req, res) => {
     }
 })
 
-route.get('/cart', auth, (req,res)=>{
+route.get('/cart',(req,res)=>{
     return res.send({msg: 'item added'})
 })
 
