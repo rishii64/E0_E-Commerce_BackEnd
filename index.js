@@ -27,7 +27,6 @@ app.get('/product/:category/:id', (req, res) => {
     let data = store.filter(data => data.id === Number(id))
     return res.send(data)
 });
-
 app.get("/search/:searchedProd", async (request, response) => {
     const searchProd = request.params.searchedProd;
     let filterProductData = store.filter((item) => item.title.toLowerCase().includes(searchProd.toLowerCase()) || item.category.toLowerCase() === searchProd.toLowerCase() || item.category.toLowerCase().includes(searchProd.toLowerCase()) || item.brand.toLowerCase() === searchProd.toLowerCase());
